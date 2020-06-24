@@ -3,6 +3,9 @@
  */
 package ru.randomsoftware.java2d;
 
+import ru.randomsoftware.java2d.rules.Rule;
+import ru.randomsoftware.java2d.rules.Rule184;
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -14,8 +17,9 @@ import java.util.Random;
 public class App extends Frame {
 
     private static final Random RND = new Random();
-    private static final int WIDTH = 1000;
-    private static final int HEIGHT = 1000;
+    private static final Rule rule = new Rule184();
+    private static final int WIDTH = 100;
+    private static final int HEIGHT = 800;
 
     App() {
         prepareGUI();
