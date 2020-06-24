@@ -56,11 +56,11 @@ public class App extends Frame {
 
     private List<Boolean> calculateNextRow(List<Boolean> row) {
         List<Boolean> nextRow = new ArrayList<>();
-        nextRow.add(calculateValue(true, row.get(0), row.get(1)));
+        nextRow.add(calculateValue(row.get(row.size() - 1), row.get(0), row.get(1)));
         for (int i = 1; i < row.size() - 1; i++) {
             nextRow.add(calculateValue(row.get(i - 1), row.get(i), row.get(i + 1)));
         }
-        nextRow.add(calculateValue(row.get(row.size() - 2), row.get(row.size() - 1), false));
+        nextRow.add(calculateValue(row.get(row.size() - 2), row.get(row.size() - 1), row.get(0)));
         return nextRow;
     }
 
