@@ -1,7 +1,7 @@
 package ru.randomsoftware.java2d.rules;
 
-public interface Rule {
+public interface Rule<T> {
 
-    boolean calculate(boolean a, boolean b, boolean c);
+    T calculate(T a, T b, T c);
 
 }
