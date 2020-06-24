@@ -14,13 +14,15 @@ import java.util.Random;
 public class App extends Frame {
 
     private static final Random RND = new Random();
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 1000;
 
     App() {
         prepareGUI();
     }
 
     private void prepareGUI(){
-        setSize(400,400);
+        setSize(WIDTH, HEIGHT);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
                 System.exit(0);
@@ -31,14 +33,13 @@ public class App extends Frame {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        int width = WIDTH;
+        int height = HEIGHT;
         // Create the new image needed
-        int size = 400;
-        int width = size;
-        int height = 400;
-        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB );
+        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        List<Boolean> row = new ArrayList<>(size);
-        for (int i = 0; i < size; i++) {
+        List<Boolean> row = new ArrayList<>(width);
+        for (int i = 0; i < width; i++) {
             boolean color = RND.nextBoolean();
             row.add(color);
             drawPixel(img, i, 0, color);
