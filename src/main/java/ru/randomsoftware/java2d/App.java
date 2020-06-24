@@ -5,11 +5,8 @@ package ru.randomsoftware.java2d;
 
 import ru.randomsoftware.java2d.generators.LineGenerator;
 import ru.randomsoftware.java2d.generators.MiddlePointLineGenerator;
-import ru.randomsoftware.java2d.generators.RandomLineGenerator;
-import ru.randomsoftware.java2d.rules.EqualityRule;
 import ru.randomsoftware.java2d.rules.Rule;
 import ru.randomsoftware.java2d.rules.Rule161;
-import ru.randomsoftware.java2d.rules.Rule184;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -22,6 +19,7 @@ public class App extends Frame {
 
     private static final Rule<Boolean> RULE = new Rule161();
     private static final LineGenerator<Boolean> GENERATOR = new MiddlePointLineGenerator();
+    private static final int OFFSET = 22;
     private static final int WIDTH = 1400;
     private static final int HEIGHT = 800;
 
@@ -33,7 +31,7 @@ public class App extends Frame {
     }
 
     private void prepareGUI(){
-        setSize(WIDTH, HEIGHT);
+        setSize(WIDTH, HEIGHT + OFFSET);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
                 System.exit(0);
@@ -53,7 +51,7 @@ public class App extends Frame {
             drawRow(img, row, y);
         }
 
-        g2d.drawImage(img, 0, 22, null);
+        g2d.drawImage(img, 0, OFFSET, null);
     }
 
     private void drawRow(BufferedImage img, List<Boolean> row, int y) {
