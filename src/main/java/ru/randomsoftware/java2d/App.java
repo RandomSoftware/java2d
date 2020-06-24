@@ -53,7 +53,7 @@ public class App extends Frame {
             drawRow(img, row, y);
         }
 
-        g2d.drawImage(img, 0, 0, null);
+        g2d.drawImage(img, 0, 22, null);
     }
 
     private void drawRow(BufferedImage img, List<Boolean> row, int y) {
