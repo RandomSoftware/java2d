@@ -18,7 +18,7 @@ public class App extends Frame {
 
     private static final Random RND = new Random();
     private static final Rule<Boolean> rule = new Rule184();
-    private static final int WIDTH = 100;
+    private static final int WIDTH = 1400;
     private static final int HEIGHT = 800;
 
     App() {
