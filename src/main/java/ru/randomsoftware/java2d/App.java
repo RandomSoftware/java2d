@@ -3,12 +3,49 @@
  */
 package ru.randomsoftware.java2d;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.util.Random;
+
+public class App extends Frame {
+
+    private static final Random RND = new Random();
+
+    App() {
+        prepareGUI();
+    }
+
+    private void prepareGUI(){
+        setSize(400,400);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent windowEvent){
+                System.exit(0);
+            }
+        });
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        // Create the new image needed
+        int width = 400;
+        int height = 400;
+        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB );
+
+        for ( int rc = 0; rc < height; rc++ ) {
+            for ( int cc = 0; cc < width; cc++ ) {
+                // Set the pixel colour of the image n.b. x = cc, y = rc
+                boolean color = RND.nextBoolean();
+                img.setRGB(cc, rc, color ? Color.BLACK.getRGB() : Color.WHITE.getRGB());
+            }//for cols
+        }//for rows
+        g2d.drawImage(img, 0, 0, null);
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        App app = new App();
+        app.setVisible(true);
     }
 }
