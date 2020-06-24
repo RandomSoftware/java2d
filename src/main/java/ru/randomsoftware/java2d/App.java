@@ -4,8 +4,11 @@
 package ru.randomsoftware.java2d;
 
 import ru.randomsoftware.java2d.generators.LineGenerator;
+import ru.randomsoftware.java2d.generators.MiddlePointLineGenerator;
 import ru.randomsoftware.java2d.generators.RandomLineGenerator;
+import ru.randomsoftware.java2d.rules.EqualityRule;
 import ru.randomsoftware.java2d.rules.Rule;
+import ru.randomsoftware.java2d.rules.Rule161;
 import ru.randomsoftware.java2d.rules.Rule184;
 
 import java.awt.*;
@@ -17,8 +20,8 @@ import java.util.List;
 
 public class App extends Frame {
 
-    private static final Rule<Boolean> RULE = new Rule184();
-    private static final LineGenerator<Boolean> GENERATOR = new RandomLineGenerator();
+    private static final Rule<Boolean> RULE = new Rule161();
+    private static final LineGenerator<Boolean> GENERATOR = new MiddlePointLineGenerator();
     private static final int WIDTH = 1400;
     private static final int HEIGHT = 800;
 
