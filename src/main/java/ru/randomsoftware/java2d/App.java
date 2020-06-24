@@ -3,6 +3,8 @@
  */
 package ru.randomsoftware.java2d;
 
+import ru.randomsoftware.java2d.generators.LineGenerator;
+import ru.randomsoftware.java2d.generators.RandomLineGenerator;
 import ru.randomsoftware.java2d.rules.Rule;
 import ru.randomsoftware.java2d.rules.Rule184;
 
@@ -12,16 +14,18 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class App extends Frame {
 
-    private static final Random RND = new Random();
-    private static final Rule<Boolean> rule = new Rule184();
+    private static final Rule<Boolean> RULE = new Rule184();
+    private static final LineGenerator<Boolean> GENERATOR = new RandomLineGenerator();
     private static final int WIDTH = 1400;
     private static final int HEIGHT = 800;
 
+    private final List<Boolean> initialRow;
+
     App() {
+        this.initialRow = GENERATOR.generate(WIDTH);
         prepareGUI();
     }
 
@@ -37,34 +41,31 @@ public class App extends Frame {
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        int width = WIDTH;
-        int height = HEIGHT;
-        // Create the new image needed
-        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 
-        List<Boolean> row = new ArrayList<>(width);
-        for (int i = 0; i < width; i++) {
-            boolean color = RND.nextBoolean();
-            row.add(color);
-            drawPixel(img, i, 0, color);
-        }
-
-        for (int y = 1; y < height; y++) {
+        List<Boolean> row = initialRow;
+        drawRow(img, row, 0);
+        for (int y = 1; y < HEIGHT; y++) {
             row = calculateNextRow(row);
-            for (int x = 0; x < row.size(); x++) {
-                drawPixel(img, x, y, row.get(x));
-            }
+            drawRow(img, row, y);
         }
+
         g2d.drawImage(img, 0, 0, null);
+    }
+
+    private void drawRow(BufferedImage img, List<Boolean> row, int y) {
+        for (int x = 0; x < row.size(); x++) {
+            drawPixel(img, x, y, row.get(x));
+        }
     }
 
     private List<Boolean> calculateNextRow(List<Boolean> row) {
         List<Boolean> nextRow = new ArrayList<>();
-        nextRow.add(rule.calculate(row.get(row.size() - 1), row.get(0), row.get(1)));
+        nextRow.add(RULE.calculate(row.get(row.size() - 1), row.get(0), row.get(1)));
         for (int i = 1; i < row.size() - 1; i++) {
-            nextRow.add(rule.calculate(row.get(i - 1), row.get(i), row.get(i + 1)));
+            nextRow.add(RULE.calculate(row.get(i - 1), row.get(i), row.get(i + 1)));
         }
-        nextRow.add(rule.calculate(row.get(row.size() - 2), row.get(row.size() - 1), row.get(0)));
+        nextRow.add(RULE.calculate(row.get(row.size() - 2), row.get(row.size() - 1), row.get(0)));
         return nextRow;
     }
 
