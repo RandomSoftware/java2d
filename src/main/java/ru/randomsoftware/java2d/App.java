@@ -5,8 +5,8 @@ package ru.randomsoftware.java2d;
 
 import ru.randomsoftware.java2d.generators.LineGenerator;
 import ru.randomsoftware.java2d.generators.MiddlePointLineGenerator;
+import ru.randomsoftware.java2d.rules.NumericRule;
 import ru.randomsoftware.java2d.rules.Rule;
-import ru.randomsoftware.java2d.rules.Rule161;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class App extends Frame {
 
-    private static final Rule<Boolean> RULE = new Rule161();
+    private static final Rule<Boolean> RULE = new NumericRule(161);
     private static final LineGenerator<Boolean> GENERATOR = new MiddlePointLineGenerator();
     private static final int OFFSET = 22;
     private static final int WIDTH = 1400;
