@@ -1,2 +1,6 @@
 # java2d
-Эксперименты с 2D графикой в Java
+Experiments with cellular automation using java2d
+
+## How-to
+* `make start` — runs the application
+* `make build` — builds the application
