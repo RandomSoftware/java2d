@@ -5,21 +5,18 @@ package ru.randomsoftware.java2d;
 
 import ru.randomsoftware.java2d.generators.LineGenerator;
 import ru.randomsoftware.java2d.generators.MiddlePointLineGenerator;
+import ru.randomsoftware.java2d.renderer.Renderer;
+import ru.randomsoftware.java2d.renderer.RendererBW;
 import ru.randomsoftware.java2d.rules.NumericRule;
 import ru.randomsoftware.java2d.rules.Rule;
 
-import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class App extends Frame {
+public class App {
 
     private static final Rule<Boolean> RULE = new NumericRule(161);
     private static final LineGenerator<Boolean> GENERATOR = new MiddlePointLineGenerator();
-    private static final int OFFSET = 22;
     private static final int WIDTH = 1400;
     private static final int HEIGHT = 800;
 
@@ -27,37 +24,18 @@ public class App extends Frame {
 
     App() {
         this.initialRow = GENERATOR.generate(WIDTH);
-        prepareGUI();
     }
 
-    private void prepareGUI(){
-        setSize(WIDTH, HEIGHT + OFFSET);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent windowEvent){
-                System.exit(0);
-            }
-        });
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        BufferedImage img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-
+    public void run() {
+        Renderer<Boolean> renderer = new RendererBW(WIDTH, HEIGHT);
+        List<List<Boolean>> matrix = new ArrayList<>();
         List<Boolean> row = initialRow;
-        drawRow(img, row, 0);
-        for (int y = 1; y < HEIGHT; y++) {
+        for (int y = 0; y < HEIGHT; y++) {
+            matrix.add(row);
             row = calculateNextRow(row);
-            drawRow(img, row, y);
         }
 
-        g2d.drawImage(img, 0, OFFSET, null);
-    }
-
-    private void drawRow(BufferedImage img, List<Boolean> row, int y) {
-        for (int x = 0; x < row.size(); x++) {
-            drawPixel(img, x, y, row.get(x));
-        }
+        renderer.render(matrix);
     }
 
     private List<Boolean> calculateNextRow(List<Boolean> row) {
@@ -70,12 +48,8 @@ public class App extends Frame {
         return nextRow;
     }
 
-    private void drawPixel(BufferedImage img, int x, int y, boolean color) {
-        img.setRGB(x, y, color ? Color.BLACK.getRGB() : Color.WHITE.getRGB());
-    }
-
     public static void main(String[] args) {
         App app = new App();
-        app.setVisible(true);
+        app.run();
     }
 }
