@@ -5,8 +5,8 @@ package ru.randomsoftware.java2d;
 
 import ru.randomsoftware.java2d.generators.LineGenerator;
 import ru.randomsoftware.java2d.generators.MiddlePointLineGenerator;
-import ru.randomsoftware.java2d.renderer.Renderer;
-import ru.randomsoftware.java2d.renderer.RendererBW;
+import ru.randomsoftware.java2d.renderers.Renderer;
+import ru.randomsoftware.java2d.renderers.RendererBW;
 import ru.randomsoftware.java2d.rules.NumericRule;
 import ru.randomsoftware.java2d.rules.Rule;
 

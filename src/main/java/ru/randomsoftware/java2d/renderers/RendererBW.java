@@ -1,4 +1,4 @@
-package ru.randomsoftware.java2d.renderer;
+package ru.randomsoftware.java2d.renderers;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
