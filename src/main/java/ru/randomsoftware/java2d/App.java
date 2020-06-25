@@ -3,49 +3,28 @@
  */
 package ru.randomsoftware.java2d;
 
-import ru.randomsoftware.java2d.generators.LineGenerator;
 import ru.randomsoftware.java2d.generators.MiddlePointLineGenerator;
 import ru.randomsoftware.java2d.renderers.Renderer;
 import ru.randomsoftware.java2d.renderers.RendererBW;
 import ru.randomsoftware.java2d.rules.NumericRule;
-import ru.randomsoftware.java2d.rules.Rule;
+import ru.randomsoftware.java2d.simulations.LineCellularAutomate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class App {
 
-    private static final Rule<Boolean> RULE = new NumericRule(161);
-    private static final LineGenerator<Boolean> GENERATOR = new MiddlePointLineGenerator();
     private static final int WIDTH = 1400;
     private static final int HEIGHT = 800;
-
-    private final List<Boolean> initialRow;
-
-    App() {
-        this.initialRow = GENERATOR.generate(WIDTH);
-    }
+    private static final LineCellularAutomate AUTOMATE = new LineCellularAutomate(
+            new MiddlePointLineGenerator(),
+            new NumericRule(161),
+            WIDTH
+    );
 
     public void run() {
         Renderer<Boolean> renderer = new RendererBW(WIDTH, HEIGHT);
-        List<List<Boolean>> matrix = new ArrayList<>();
-        List<Boolean> row = initialRow;
-        for (int y = 0; y < HEIGHT; y++) {
-            matrix.add(row);
-            row = calculateNextRow(row);
-        }
-
+        List<List<Boolean>> matrix = AUTOMATE.buildGenerations(HEIGHT);
         renderer.render(matrix);
-    }
-
-    private List<Boolean> calculateNextRow(List<Boolean> row) {
-        List<Boolean> nextRow = new ArrayList<>();
-        nextRow.add(RULE.calculate(row.get(row.size() - 1), row.get(0), row.get(1)));
-        for (int i = 1; i < row.size() - 1; i++) {
-            nextRow.add(RULE.calculate(row.get(i - 1), row.get(i), row.get(i + 1)));
-        }
-        nextRow.add(RULE.calculate(row.get(row.size() - 2), row.get(row.size() - 1), row.get(0)));
-        return nextRow;
     }
 
     public static void main(String[] args) {
