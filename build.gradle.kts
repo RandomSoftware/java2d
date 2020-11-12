@@ -7,11 +7,13 @@
  */
 
 plugins {
-    // Apply the java plugin to add support for Java
     java
-
-    // Apply the application plugin to add support for building a CLI application
+    kotlin("jvm") version "1.4.10"
     application
+}
+
+application {
+    mainClassName = "ru.randomsoftware.java2d.ApplicationKt"
 }
 
 repositories {
@@ -26,9 +28,4 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation("junit:junit:4.12")
-}
-
-application {
-    // Define the main class for the application
-    mainClassName = "ru.randomsoftware.java2d.App"
 }
