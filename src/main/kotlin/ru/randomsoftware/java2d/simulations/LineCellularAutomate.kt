@@ -7,11 +7,11 @@ class LineCellularAutomate(
         generator: LineGenerator<Boolean>,
         private val rule: Rule<Boolean>,
         size: Int
-) {
+): Automate<Boolean> {
 
     private val initialRow: List<Boolean> = generator.generate(size)
 
-    fun buildGenerations(n: Int): List<List<Boolean>> {
+    override fun buildGenerations(n: Int): List<List<Boolean>> {
         return generateSequence(initialRow) { calculateNextRow(it) }.take(n).toList()
     }
 
