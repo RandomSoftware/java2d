@@ -3,19 +3,19 @@ package ru.randomsoftware.java2d.simulations
 import ru.randomsoftware.java2d.generators.LineGenerator
 import ru.randomsoftware.java2d.rules.Rule
 
-class LineCellularAutomate(
-        generator: LineGenerator<Boolean>,
-        private val rule: Rule<Boolean>,
+class LineCellularAutomate<T>(
+        generator: LineGenerator<T>,
+        private val rule: Rule<T>,
         size: Int
-): Automate<Boolean> {
+): Automate<T> {
 
-    private val initialRow: List<Boolean> = generator.generate(size)
+    private val initialRow: List<T> = generator.generate(size)
 
-    override fun buildGenerations(n: Int): List<List<Boolean>> {
+    override fun buildGenerations(n: Int): List<List<T>> {
         return generateSequence(initialRow) { calculateNextRow(it) }.take(n).toList()
     }
 
-    private fun calculateNextRow(row: List<Boolean>): List<Boolean> {
+    private fun calculateNextRow(row: List<T>): List<T> {
         return row.takeLast(1).plus(row.dropLast(1))
                 .zip(row)
                 .zip(row.drop(1).plus(row.take(1)))

@@ -5,10 +5,10 @@ import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import kotlin.system.exitProcess
 
-class RendererBW(
+class RendererRGB(
     frameWidth: Int,
     frameHeight: Int
-) : AbstractRenderer<Boolean>(frameWidth, frameHeight) {
+) : AbstractRenderer<Triple<Boolean, Boolean, Boolean>>(frameWidth, frameHeight) {
 
     init {
         setSize(frameWidth, frameHeight + OFFSET)
@@ -19,8 +19,12 @@ class RendererBW(
         })
     }
 
-    override fun getColor(color: Boolean): Color {
-        return if (color) Color.BLACK else Color.WHITE
+    override fun getColor(color: Triple<Boolean, Boolean, Boolean>): Color {
+        return Color(getColorComponent(color.first), getColorComponent(color.second), getColorComponent(color.third))
+    }
+
+    private fun getColorComponent(isBright: Boolean): Int {
+        return if (isBright) 255 else 0
     }
 
     companion object {
