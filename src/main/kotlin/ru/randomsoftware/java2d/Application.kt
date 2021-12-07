@@ -26,7 +26,7 @@ class Application {
 }
 
 
-fun main(args: Array<String>) {
+fun main() {
     val application = Application()
     application.run()
 }

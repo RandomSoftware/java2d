@@ -12,7 +12,7 @@ class LineCellularAutomate(
     private val initialRow: List<Boolean> = generator.generate(size)
 
     fun buildGenerations(n: Int): List<List<Boolean>> {
-        return generateSequence(initialRow, { calculateNextRow(it) }).take(n).toList()
+        return generateSequence(initialRow) { calculateNextRow(it) }.take(n).toList()
     }
 
     private fun calculateNextRow(row: List<Boolean>): List<Boolean> {
