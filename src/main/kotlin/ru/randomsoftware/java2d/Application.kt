@@ -3,7 +3,7 @@ package ru.randomsoftware.java2d
 import ru.randomsoftware.java2d.generators.RandomLineGenerator
 import ru.randomsoftware.java2d.renderers.RendererBW
 import ru.randomsoftware.java2d.rules.NumericRule
-import ru.randomsoftware.java2d.simulations.LineCellularAutomate
+import ru.randomsoftware.java2d.automata.LineCellularAutomata
 
 class Application {
 
@@ -16,7 +16,7 @@ class Application {
     companion object {
         const val WIDTH = 1400
         const val HEIGHT = 800
-        val AUTOMATE = LineCellularAutomate(
+        val AUTOMATE = LineCellularAutomata(
                 RandomLineGenerator(),
                 NumericRule(184),
                 WIDTH

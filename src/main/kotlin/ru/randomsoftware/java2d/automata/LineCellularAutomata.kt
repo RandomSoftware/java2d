@@ -1,13 +1,13 @@
-package ru.randomsoftware.java2d.simulations
+package ru.randomsoftware.java2d.automata
 
 import ru.randomsoftware.java2d.generators.LineGenerator
 import ru.randomsoftware.java2d.rules.Rule
 
-class LineCellularAutomate<T>(
+class LineCellularAutomata<T>(
         generator: LineGenerator<T>,
         private val rule: Rule<T>,
         size: Int
-): Automate<T> {
+): Automata<T> {
 
     private val initialRow: List<T> = generator.generate(size)
 
