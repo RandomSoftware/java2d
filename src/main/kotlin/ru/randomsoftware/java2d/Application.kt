@@ -4,23 +4,25 @@ import ru.randomsoftware.java2d.generators.RandomLineGenerator
 import ru.randomsoftware.java2d.renderers.RendererBW
 import ru.randomsoftware.java2d.rules.NumericRule
 import ru.randomsoftware.java2d.automata.LineCellularAutomata
+import ru.randomsoftware.java2d.simulation.StaticSimulation
 
 class Application {
 
     fun run() {
-        val renderer = RendererBW(WIDTH, HEIGHT)
-        val matrix = AUTOMATE.buildGenerations(HEIGHT)
-        renderer.render(matrix)
+        val simulation = StaticSimulation(
+            LineCellularAutomata(
+                RandomLineGenerator(),
+                NumericRule(184),
+                WIDTH
+            ),
+            RendererBW(WIDTH, HEIGHT)
+        )
+        simulation.run()
     }
 
     companion object {
         const val WIDTH = 1400
         const val HEIGHT = 800
-        val AUTOMATE = LineCellularAutomata(
-                RandomLineGenerator(),
-                NumericRule(184),
-                WIDTH
-        )
     }
 
 }
