@@ -8,7 +8,7 @@
 
 plugins {
     java
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.6.0"
     application
 }
 
@@ -20,12 +20,13 @@ repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
     // This dependency is used by the application.
-    implementation("com.google.guava:guava:28.0-jre")
+    implementation("com.google.guava:guava:31.0.1-jre")
 
     // Use JUnit test framework
-    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.13.2")
 }
