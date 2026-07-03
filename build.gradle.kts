@@ -7,26 +7,25 @@
  */
 
 plugins {
-    java
-    kotlin("jvm") version "1.6.0"
-    application
+  java
+  kotlin("jvm") version "1.6.0"
+  application
+  id("com.ncorti.ktfmt.gradle") version "0.22.0"
 }
 
-application {
-    mainClassName = "ru.randomsoftware.java2d.ApplicationKt"
-}
+application { mainClassName = "ru.randomsoftware.java2d.ApplicationKt" }
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-    mavenCentral()
+  // Use jcenter for resolving dependencies.
+  // You can declare any Maven/Ivy/file repository here.
+  jcenter()
+  mavenCentral()
 }
 
 dependencies {
-    // This dependency is used by the application.
-    implementation("com.google.guava:guava:31.0.1-jre")
+  // This dependency is used by the application.
+  implementation("com.google.guava:guava:31.0.1-jre")
 
-    // Use JUnit test framework
-    testImplementation("junit:junit:4.13.2")
+  // Use JUnit test framework
+  testImplementation("junit:junit:4.13.2")
 }
