@@ -18,31 +18,14 @@ A Java2D cellular automaton visualizer written in Kotlin. It simulates 1D cellul
 
 Three-layer architecture: **generators → automata → simulation → renderers**
 
-### Rules (`rules/`)
-- `Rule<T>` — interface: `calculate(a: T, b: T, c: T): T`
-- `NumericRule(base: Int)` — Wolfram-style rule encoded as an integer (0–255). Each bit determines the output for one of the 8 possible `(a, b, c)` combinations. Throws `IllegalArgumentException` for values outside `[0, 255]`.
-- `EqualityRule` — always returns `b` (the center cell), ignoring neighbors.
+## Formatting
 
-### Generators (`generators/`)
-- `LineGenerator<T>` — interface: `generate(size: Int): List<T>`
-- `MiddlePointLineGenerator` — produces a Boolean row with only the middle cell set to `true`.
-- `RandomLineGenerator` — produces a random Boolean row.
+Always format code before committing it
 
-### Automata (`automata/`)
-- `Automata<T>` — interface: `buildGenerations(n: Int): List<List<T>>`
-- `LineCellularAutomata<T>` — wraps a generator + rule; builds generations using a toroidal (wrap-around) neighborhood.
+```bash
+./gradlew ktfmtFormat # format code 
+```
 
-### Simulation (`simulation/`)
-- `StaticSimulation<T>` — runs the automata for `Application.HEIGHT` generations and hands the matrix to a renderer.
+## Commit message convention
 
-### Renderers (`renderers/`)
-- `Renderer<T>` — interface: `render(matrix: List<List<T>>)`
-- `RendererBW` — renders Boolean matrix as black/white pixels in a Swing frame.
-- `RendererRGB` — renders a three-channel (RGB) matrix.
-
-## Tests
-
-Tests live in `src/test/kotlin/ru/randomsoftware/java2d/rules/`.
-
-- `NumericRuleTest` — covers constructor validation, `intToBooleanList`, and all 8 `calculate` input combinations using rule 110 as the reference case; also exhaustively tests rules 0 and 255.
-- `EqualityRuleTest` — covers all 8 input combinations grouped by the value of `b`.
+Commit messages follow [Conventional Commits rules](https://www.conventionalcommits.org/en/v1.0.0/)
